@@ -1,5 +1,4 @@
-#ifndef SLAVE_H
-#define SLAVE_H
+#pragma once
 
 #include <QObject>
 
@@ -24,5 +23,3 @@ private Q_SLOTS:
 private:
     QTcpSocket *m_socket;
 };
-
-#endif // SLAVE_H

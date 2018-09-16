@@ -1,5 +1,4 @@
-#ifndef MASTER_H
-#define MASTER_H
+#pragma once
 
 #include <QObject>
 #include <QSerialPort>
@@ -42,5 +41,3 @@ private:
     QSerialPort *m_serialPort;
     QTcpServer *m_server;
 };
-
-#endif // MASTER_H
