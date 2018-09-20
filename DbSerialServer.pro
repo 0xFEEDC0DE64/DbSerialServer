@@ -1,7 +1,7 @@
 QT += core network serialport
 QT -= gui widgets
 
-DBLIBS +=
+DBLIBS += dbnetwork
 
 TARGET = serialserver
 

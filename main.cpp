@@ -4,6 +4,8 @@
 #include <QSerialPort>
 #include <QTcpServer>
 
+#include "utils/netutils.h"
+
 #include "master.h"
 
 int main(int argc, char *argv[])
@@ -30,33 +32,12 @@ int main(int argc, char *argv[])
     qDebug() << "Starting tcp server...";
     auto server = new QTcpServer;
 
+    if(!server->listen(parseHostAddress(settings.value("server/address", "Any").toString()),
+                       (quint16)settings.value("server/port", 1234).toUInt()))
     {
-        auto listenAddress = settings.value("server/address", "Any").toString();
-        QHostAddress hostAddress;
-
-        if(listenAddress == "Null")
-            hostAddress = QHostAddress::Null;
-        else if(listenAddress == "Broadcast")
-            hostAddress = QHostAddress::Broadcast;
-        else if(listenAddress == "LocalHost")
-            hostAddress = QHostAddress::LocalHost;
-        else if(listenAddress == "LocalHostIPv6")
-            hostAddress = QHostAddress::LocalHostIPv6;
-        else if(listenAddress == "Any")
-            hostAddress = QHostAddress::Any;
-        else if(listenAddress == "AnyIPv6")
-            hostAddress = QHostAddress::AnyIPv6;
-        else if(listenAddress == "AnyIPv4")
-            hostAddress = QHostAddress::AnyIPv4;
-        else
-            hostAddress = QHostAddress(listenAddress);
-
-        if(!server->listen(hostAddress, (quint16)settings.value("server/port", 1234).toUInt()))
-        {
-            qWarning() << server->errorString();
-            qFatal("could not start listening");
-            return -2;
-        }
+        qWarning() << server->errorString();
+        qFatal("could not start listening");
+        return -2;
     }
 
     new Master(serialPort, server, &app);
