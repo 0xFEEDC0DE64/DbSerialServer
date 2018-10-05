@@ -24,7 +24,7 @@ script:
   - ccache -s
   - git clone https://github.com/0xFEEDC0DE64/DbSoftware.git ../DbSoftware
   - pushd ../DbSoftware
-  - git submodule update --init libs/DbNetworkLib
+  - git submodule update --init libs/DbCoreLib libs/DbNetworkLib
   - popd
   - shopt -s dotglob
   - mv * ../DbSoftware/DbSerialServer -v
