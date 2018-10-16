@@ -19,8 +19,10 @@ add_executable(serialserver ${HEADERS} ${SOURCES} ${DISTFILES})
 
 target_link_libraries(serialserver Qt5::Core Qt5::Network Qt5::SerialPort dbnetworklib)
 
-list(TRANSFORM DISTFILES
-     PREPEND ${CMAKE_CURRENT_SOURCE_DIR}/)
+#list(TRANSFORM DISTFILES
+#     PREPEND ${CMAKE_CURRENT_SOURCE_DIR}/)
+
+PREPEND(DISTFILES ${CMAKE_CURRENT_SOURCE_DIR}/ ${DISTFILES})
 
 file(COPY ${DISTFILES}
      DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
