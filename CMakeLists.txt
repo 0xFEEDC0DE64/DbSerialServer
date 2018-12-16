@@ -1,5 +1,9 @@
 project(DbSerialServer)
 
+find_package(Qt5Core CONFIG REQUIRED)
+find_package(Qt5Network CONFIG REQUIRED)
+find_package(Qt5SerialPort CONFIG REQUIRED)
+
 set(HEADERS
     master.h
     slave.h
